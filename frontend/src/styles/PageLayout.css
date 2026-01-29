@@ -3,22 +3,32 @@
 /* ===== БАЗОВЫЕ КОНТЕЙНЕРЫ ===== */
 
 /* Основной контейнер страницы */
-юю.page-layout-container {
-  height: calc(100vh - 100px);
-  padding: 7mm;
-  padding-top: 15mm;
-  margin-left: 3rem;
-  margin-top: 70px;
-  /* Убираем отступ - он уже есть в page-container */
+.page-layout-container {
+  height: 100vh;
+  padding: 0;
+  margin: 0;
   /* Светло-светло-серый фон */
   background: #e8e8e8;
   display: flex;
   flex-direction: column;
-  overflow: hidden !important;
+  overflow: visible !important;
 }
 
 /* Для planner-mode - переопределяем все ограничения для полного экрана */
 .page-layout-container.planner-mode {
+  height: 100vh !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+}
+
+/* Для map-mode - переопределяем все ограничения для полного экрана */
+.page-layout-container.map-mode {
   height: 100vh !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -37,11 +47,10 @@
  * (между sidebar и левым краем постов)
  */
 
-/* Для Leaflet карт */
-.has-left-panel .leaflet-container {
-  /* Смещаем центр карты влево на 25% ширины экрана */
-  /* Это делается через CSS transform - карта рендерится шире, но визуально смещена */
-}
+/* Для Leaflet карт - центр смещается через JS в компоненте карты
+   При необходимости можно добавить CSS transform:
+   .has-left-panel .leaflet-container { transform: translateX(-25%); }
+*/
 
 /* Для Yandex Maps - центр управляется через margin API в JS */
 
@@ -517,7 +526,7 @@
   /* Скрываем скролл на activity-feed контейнере */
   scrollbar-width: none !important;
   -ms-overflow-style: none !important;
-  overflow: hidden !important;
+  overflow: visible !important;
 }
 
 .activity-feed::-webkit-scrollbar {

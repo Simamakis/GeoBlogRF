@@ -242,7 +242,7 @@ const Sidebar: React.FC = () => {
           WebkitBackdropFilter: 'blur(16px)',
           borderRight: 'none', // Убираем границу справа - нет разделения с Topbar
           transition: 'width 0.3s ease',
-          overflow: 'hidden',
+          overflow: 'visible',
           color: 'var(--text-primary)',
           boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)'
         }}

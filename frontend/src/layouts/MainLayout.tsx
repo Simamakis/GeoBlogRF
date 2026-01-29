@@ -9,7 +9,6 @@ import PageLayer from '../pages/PageLayer';
 import { usePreload } from '../hooks/usePreload';
 import Topbar from '../components/Topbar';
 import MapBackgroundExtension from '../components/MapBackgroundExtension';
-import PersistentMapBackground from '../components/PersistentMapBackground';
 // import AppRoutes from '../routes';
 
 const SOLO_ROUTES: string[] = []; // Страницы которые открываются на полный экран (блог обрабатывается отдельно)
@@ -141,7 +140,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     <div className="app-root" style={{
       background: 'transparent', // Прозрачный фон - карта просвечивает
       minHeight: '100vh',
-      overflow: 'hidden',
+      overflow: 'visible',
       position: 'relative',
       width: '100%',
       height: '100vh'
@@ -167,11 +166,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           left: 0,
           width: '100%',
           height: '100vh',
-          overflow: 'hidden'
+          overflow: 'visible'
         }}
       >
-        {/* Интерактивная (неинтерактивная для пользователя) фоновая карта */}
-        <PersistentMapBackground />
         {/* Статичный картографический SVG‑паттерн (fallback / decorative) */}
         <MapBackgroundExtension />
         {/* Левая панель (карта/планировщик/календарь) - с самого верха до низа, с самого лева */}
@@ -185,7 +182,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             // Когда левая панель активна (map или planner), ставим её ПОД сайдбаром для эффекта стекла
             // Сайдбар имеет zIndex = 1150, карта должна быть ниже для морфизма
             zIndex: leftContent === 'map' || leftContent === 'planner' ? 1140 : (leftContent ? 1160 : 0),
-            overflow: 'hidden',
+            overflow: 'visible',
             pointerEvents: leftContent ? 'auto' : 'none',
           }}
         >
@@ -219,7 +216,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
               visibility: 'visible',
               zIndex: 1145,
               background: 'transparent',
-              overflow: 'hidden',
+              overflow: 'visible',
               pointerEvents: 'auto',
             } : {
               // Однооконный режим - прозрачный контейнер, CSS сделает остальное
@@ -233,7 +230,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
               justifyContent: 'center',
               zIndex: 1100,
               pointerEvents: 'auto',
-              overflow: 'hidden',
+              overflow: 'visible',
               background: 'transparent',
             }}
           >
@@ -241,7 +238,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
               width: '100%',
               height: '100%',
               position: 'relative',
-              overflow: 'hidden',
+              overflow: 'visible',
             }}>
               <PageLayer side="right" />
             </div>

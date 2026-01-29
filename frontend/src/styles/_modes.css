@@ -1,0 +1,152 @@
+/* ========================================
+   _MODES.CSS - Стили режимов
+   ======================================== */
+
+/* --- Default mode (обычный режим) --- */
+.page-layout-container:not(.map-mode):not(.planner-mode):not(.chat-container) {
+  padding: 28px;
+}
+
+.page-container:not(.map-mode):not(.planner-mode):not(.chat-container) {
+  padding: 28px;
+}
+
+/* --- Chat mode --- */
+.page-layout-container.chat-container,
+.page-container.chat-container {
+  padding: 32px 0;
+}
+
+/* --- Planner mode --- */
+.page-layout-container.planner-mode,
+.page-container.planner-mode {
+  height: calc(100vh - 64px);
+  min-height: calc(100vh - 64px);
+  max-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  background: var(--bg-page);
+  padding: 0;
+  margin: 0;
+}
+
+.page-container.planner-mode {
+  padding: 0;
+}
+
+.page-main-area.planner-mode {
+  height: calc(100vh - 64px - 60px);
+  min-height: calc(100vh - 64px - 60px);
+  max-height: calc(100vh - 64px - 60px);
+  margin-bottom: 60px;
+  background: transparent;
+  padding: 0;
+}
+
+/* --- Map mode (полноэкранный режим карты) --- */
+.page-layout-container.map-mode {
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  padding: 0;
+  margin: 0;
+  display: contents;
+  overflow: visible;
+  background: var(--bg-page);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  inset: 0;
+}
+
+.page-container.map-mode {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.page-main-area.map-mode {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.page-content-wrapper.map-mode {
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+.page-main-panel.map-mode {
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+/* --- Map-specific panels --- */
+.page-left-panel.map-mode {
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  backdrop-filter: none;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+  border: none;
+  position: relative;
+}
+
+.page-right-panel.map-mode {
+  border-radius: var(--radius-xl);
+  background: var(--glass-bg-modal);
+  backdrop-filter: var(--glass-blur-strong);
+  box-shadow: var(--glass-shadow);
+  overflow: visible;
+  border: 1px solid var(--glass-border);
+  position: relative;
+}
+
+/* --- Posts mode --- */
+.page-container.posts-mode {
+  background: var(--glass-bg-modal);
+  backdrop-filter: var(--glass-blur-strong);
+  border-radius: var(--glass-radius-lg);
+  box-shadow: var(--glass-shadow);
+  border: 1px solid var(--glass-border);
+  overflow: visible;
+}
+
+/* --- Facade map mode --- */
+.facade-map-root {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--glass-radius);
+  box-shadow: var(--glass-shadow);
+  border: 1px solid var(--glass-border);
+  overflow: visible;
+  transition: all 0.3s ease;
+}
+
+.facade-map-root:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--glass-shadow-hover);
+}
