@@ -102,3 +102,125 @@
   width: 205px;
   height: 285px;
 }
+
+/* --- Modals & Overlays (Универсальные классы) --- */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Темный оверлей (например, для галереи) */
+.modal-overlay-dark {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  min-width: 320px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  color: #888;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+
+.modal-close-btn:hover {
+  color: var(--color-h-danger);
+}
+
+/* --- Popup Specifics --- */
+
+/* Иконка-кнопка поверх фото (камера) */
+.overlay-icon-btn {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  color: #333;
+  font-size: 1.4em;
+  cursor: pointer;
+  z-index: 3;
+  transition: color 0.2s;
+  text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.8);
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.overlay-icon-btn:hover {
+  color: #007bff;
+}
+
+/* Бейдж на фото (кол-во фото) */
+.overlay-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 12px;
+  padding: 4px 8px;
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 3;
+  user-select: none;
+}
+
+/* Кнопка "Читать далее" в описании */
+.text-link-btn {
+  background: none;
+  border: none;
+  color: #3498db;
+  cursor: pointer;
+  font-size: 0.8em;
+  padding: 0;
+  margin: 0;
+  display: inline;
+}
+
+.text-link-btn:hover {
+  text-decoration: underline;
+}
+
+/* Вспомогательные классы */
+.photo-clickable { cursor: pointer; }
+.completeness-badge { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); z-index: 10; }
+.gallery-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); color: white; border: none; font-size: 2em; cursor: pointer; padding: 10px 15px; border-radius: 5px; z-index: 2001; }
+.gallery-nav-btn:focus { outline: none; }
+.gallery-nav-btn.gallery-prev { left: 20px; }
+.gallery-nav-btn.gallery-next { right: 20px; }
+.gallery-image { max-width: calc(100% - 60px); max-height: calc(100% - 60px); object-fit: contain; border: 3px solid white; border-radius: 4px; box-shadow: 0 5px 20px rgba(0,0,0,0.4); }
+
+/* Modal form inputs / actions */
+.modal-input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 12px; cursor: pointer; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 8px; }
+.modal-btn { padding: 6px 16px; border-radius: 4px; border: none; cursor: pointer; }
+.modal-btn-alt { background: #eee; }
+.modal-btn-primary { background: #8e44ad; color: #fff; }
+.modal-status { margin-top: 10px; }

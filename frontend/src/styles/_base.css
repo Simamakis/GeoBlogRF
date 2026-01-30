@@ -53,7 +53,16 @@
   
   /* Стекло (Темные оверлеи / Сообщения) */
   --glass-bg-dark: rgba(0, 0, 0, 0.75);
-  
+
+  /* --- Visual States (для MarkerPopup и других элементов) --- */
+  --state-favorite: #ff9800;        /* Оранжевый - избранное */
+  --state-user-modified: #00ffff;   /* Неоновый - изменено пользователем */
+  --state-used-in-blog: #ffd700;    /* Золотой - использовано в блоге */
+  --state-success: #28a745;         /* Зеленый - успех */
+  --state-danger: #ef4444;          /* Красный - опасность/ошибка */
+  --state-warning: #f97316;         /* Оранжево-переходный - предупреждение */
+  --state-warning-light: #fbbf24;   /* Светлый предупреждающий */
+
   /* --- Radii --- */
   --radius-sm: 8px;
   --radius-md: 12px;
