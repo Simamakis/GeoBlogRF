@@ -543,35 +543,11 @@ const MarkerPopup: React.FC<MarkerPopupProps> = React.memo(({ marker, onClose, o
                 {marker.description && marker.description.length > 120 && (
                   <div style={{ textAlign: 'right', margin: 0, padding: 0, lineHeight: 1 }}>
                     {!isDescriptionExpanded ? (
-                      <button
-                        onClick={handleDescriptionToggle}
-                        style={{
-                          background: 'none',
-                          border: 'none',
-                          color: '#3498db',
-                          cursor: 'pointer',
-                          fontSize: '0.8em',
-                          margin: 0,
-                          padding: 0,
-                          lineHeight: 1
-                        }}
-                      >
+                      <button onClick={handleDescriptionToggle} className="text-link-btn">
                         Читать далее
                       </button>
                     ) : (
-                      <button
-                        onClick={handleDescriptionToggle}
-                        style={{
-                          background: 'none',
-                          border: 'none',
-                          color: '#3498db',
-                          cursor: 'pointer',
-                          fontSize: '0.8em',
-                          margin: 0,
-                          padding: 0,
-                          lineHeight: 1
-                        }}
-                      >
+                      <button onClick={handleDescriptionToggle} className="text-link-btn">
                         Скрыть
                       </button>
                     )}
@@ -717,20 +693,7 @@ const MarkerPopup: React.FC<MarkerPopupProps> = React.memo(({ marker, onClose, o
                 Добавить в избранное
               </div>
               <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '12px' }}>
-                <button
-                  onClick={handleCancelCategory}
-                  style={{
-                    padding: '6px 12px',
-                    border: '1px solid #6c757d',
-                    borderRadius: '4px',
-                    background: '#fff',
-                    color: '#6c757d',
-                    fontSize: '12px',
-                    cursor: 'pointer'
-                  }}
-                >
-                  Отмена
-                </button>
+                <button onClick={handleCancelCategory} className="modal-btn modal-btn-alt">Отмена</button>
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
@@ -760,15 +723,8 @@ const MarkerPopup: React.FC<MarkerPopupProps> = React.memo(({ marker, onClose, o
                     // Закрываем форму выбора категории, но оставляем попап открытым
                     setShowCategorySelection(false);
                   }}
-                  style={{
-                    padding: '6px 12px',
-                    border: 'none',
-                    borderRadius: '4px',
-                    background: '#28a745',
-                    color: '#fff',
-                    fontSize: '12px',
-                    cursor: 'pointer'
-                  }}
+                  className="modal-btn modal-btn-primary"
+                  style={{ background: 'var(--state-success)', borderColor: 'var(--state-success)' }}
                 >
                   Добавить
                 </button>

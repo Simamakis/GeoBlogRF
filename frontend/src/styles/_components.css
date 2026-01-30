@@ -202,11 +202,15 @@
   padding: 0;
   margin: 0;
   display: inline;
+  text-decoration: none;
 }
 
 .text-link-btn:hover {
   text-decoration: underline;
+  color: #2980b9;
 }
+
+/* Вспомогательные классы */
 
 /* Вспомогательные классы */
 .photo-clickable { cursor: pointer; }
@@ -220,7 +224,8 @@
 /* Modal form inputs / actions */
 .modal-input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 12px; cursor: pointer; }
 .modal-actions { display: flex; justify-content: flex-end; gap: 8px; }
-.modal-btn { padding: 6px 16px; border-radius: 4px; border: none; cursor: pointer; }
-.modal-btn-alt { background: #eee; }
-.modal-btn-primary { background: #8e44ad; color: #fff; }
+.modal-btn { padding: 6px 16px; border-radius: 4px; border: none; cursor: pointer; font-size: 14px; }
+.modal-btn-alt { background: #eee; color: #333; }
+.modal-btn-primary { background: #8e44ad; color: #fff; border: 1px solid #8e44ad; }
+.modal-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 .modal-status { margin-top: 10px; }
