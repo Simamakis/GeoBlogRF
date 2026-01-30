@@ -654,14 +654,12 @@ const PostsPage: React.FC = () => {
                   {draftsCount > 0 && (
                     <button
                       onClick={() => setShowDraftsPanel(true)}
-                      className="flex items-center gap-2 px-4 py-2.5 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg hover:bg-gray-700 transition-all duration-200 relative"
+                      className="btn-drafts"
                       title="Офлайн черновики"
                     >
                       <FaCloud className="w-4 h-4" />
                       <span>Черновики</span>
-                      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                        {draftsCount}
-                      </span>
+                      <span className="drafts-badge">{draftsCount}</span>
                     </button>
                   )}
                   <button
@@ -719,12 +717,12 @@ const PostsPage: React.FC = () => {
                       />
                     ))
                   ) : (
-                    <div className="text-center py-12">
-                      <div className="w-16 h-16 mx-auto mb-4 bg-white/40 backdrop-blur-sm rounded-full flex items-center justify-center">
-                        <FaEdit className="w-8 h-8 text-gray-500" />
+                    <div className="posts-state-view">
+                      <div className="posts-state-icon-wrapper">
+                        <FaEdit className="posts-state-icon" />
                       </div>
-                      <h3 className="text-lg font-medium text-gray-900 mb-2">Пока нет постов</h3>
-                      <p className="text-gray-600">Создайте первый пост, нажав кнопку выше</p>
+                      <h3 className="posts-state-title">Пока нет постов</h3>
+                      <p className="posts-state-subtitle">Создайте первый пост, нажав кнопку выше</p>
                     </div>
                   )}
                 </div>
