@@ -625,10 +625,6 @@
 
 /* --- Posts Page Header & Filters --- */
 
-.posts-header {
-  /* Обертка статического хедера */
-}
-
 .posts-title-row {
   display: flex;
   align-items: center;
