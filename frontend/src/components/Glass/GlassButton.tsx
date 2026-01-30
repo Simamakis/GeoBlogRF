@@ -1,5 +1,4 @@
 import React from 'react';
-import './GlassButton.css';
 
 export interface GlassButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
