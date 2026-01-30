@@ -558,6 +558,15 @@
   border: 1px solid var(--border-light);
 }
 
+/* Заголовок и подзаголовок активити */
+.activity-title {
+  color: var(--text-primary);
+}
+
+.activity-subtitle {
+  color: var(--text-secondary);
+}
+
 /* --- Боковые кнопки (Side Buttons) --- */
 .activity-side-buttons {
   /* Задаем переменные по умолчанию, чтобы не было ошибок если класс не применится */
