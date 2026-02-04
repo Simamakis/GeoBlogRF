@@ -1163,13 +1163,24 @@ export class MapContextFacade {
   registerBackgroundApi(api: any, containerId?: string): void {
     try {
       (this as any).INTERNAL = (this as any).INTERNAL || {};
-      (this as any).INTERNAL.api = api;
+      // Support marking background API as passive (no markers/events by default)
+      if (api && typeof api === 'object' && api.passive) {
+        (this as any).INTERNAL.api = api.map ?? api;
+        (this as any).INTERNAL.passive = true;
+      } else {
+        (this as any).INTERNAL.api = api;
+        (this as any).INTERNAL.passive = false;
+      }
       if (containerId) (this as any).INTERNAL.containerId = containerId;
     } catch (error_) { console.debug('[MapContextFacade] registerBackgroundApi failed:', error_); }
   }
 
   getRegisteredApi(): any {
     return (this as any).INTERNAL?.api ?? null;
+  }
+
+  isRegisteredBackgroundPassive(): boolean {
+    return !!(this as any).INTERNAL?.passive;
   }
 
   // ========================================
