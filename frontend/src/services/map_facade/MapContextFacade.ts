@@ -533,6 +533,12 @@ export class MapContextFacade {
   }
 
   addMarker(marker: MapMarker): void {
+    // If a passive background API is registered, skip adding markers by default.
+    if (this.isRegisteredBackgroundPassive()) {
+      console.debug('[MapContextFacade] Skipping addMarker because background is passive');
+      return;
+    }
+
     const category = marker.category ? getCategoryByKey(marker.category) : null;
     const unified: UnifiedMarker = {
       id: marker.id || crypto.randomUUID(),
@@ -1186,6 +1192,21 @@ export class MapContextFacade {
   // ========================================
   // НОВЫЕ ПУБЛИЧНЫЕ МЕТОДЫ ДЛЯ РАБОТЫ С КАРТОЙ
   // ========================================
+
+  renderMarkers(markers: UnifiedMarker[]): void {
+    try {
+      if (this.isRegisteredBackgroundPassive()) {
+        console.debug('[MapContextFacade] Skipping renderMarkers because background is passive');
+        return;
+      }
+      const r = this.currentRenderer as any;
+      if (r?.renderMarkers) {
+        r.renderMarkers(markers);
+        return;
+      }
+    } catch (error_) { console.debug('[MapContextFacade] renderMarkers failed:', error_); }
+    // otherwise no-op
+  }
 
   /**
    * Получение инстанса карты из текущего рендерера
