@@ -5,7 +5,7 @@ import GlobalLoadingOverlay from './components/GlobalLoadingOverlay';
 import {
   LazyHomePage, LazyHome, LazyCalendar, LazyChat,
   LazyActivity, LazyCentrePage, LazyFriends, LazyModerationPage,
-  LazyUserAgreement, LazyPrivacyPolicy, LazyAnalyticsDashboard
+  LazyUserAgreement, LazyPrivacyPolicy, LazyAnalyticsDashboard, LazyAdminSubscriptionsPage
 } from './components/LazyComponents';
 // Posts загружается статически для быстрой загрузки проекта с фокусом на контенте
 import Posts from './pages/Posts';
