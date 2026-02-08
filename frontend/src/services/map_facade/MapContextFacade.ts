@@ -533,6 +533,12 @@ export class MapContextFacade {
   }
 
   addMarker(marker: MapMarker): void {
+    // If a passive background API is registered, skip adding markers by default.
+    if (this.isRegisteredBackgroundPassive()) {
+      console.debug('[MapContextFacade] Skipping addMarker because background is passive');
+      return;
+    }
+
     const category = marker.category ? getCategoryByKey(marker.category) : null;
     const unified: UnifiedMarker = {
       id: marker.id || crypto.randomUUID(),
@@ -1163,7 +1169,14 @@ export class MapContextFacade {
   registerBackgroundApi(api: any, containerId?: string): void {
     try {
       (this as any).INTERNAL = (this as any).INTERNAL || {};
-      (this as any).INTERNAL.api = api;
+      // Support marking background API as passive (no markers/events by default)
+      if (api && typeof api === 'object' && api.passive) {
+        (this as any).INTERNAL.api = api.map ?? api;
+        (this as any).INTERNAL.passive = true;
+      } else {
+        (this as any).INTERNAL.api = api;
+        (this as any).INTERNAL.passive = false;
+      }
       if (containerId) (this as any).INTERNAL.containerId = containerId;
     } catch (error_) { console.debug('[MapContextFacade] registerBackgroundApi failed:', error_); }
   }
@@ -1172,9 +1185,28 @@ export class MapContextFacade {
     return (this as any).INTERNAL?.api ?? null;
   }
 
+  isRegisteredBackgroundPassive(): boolean {
+    return !!(this as any).INTERNAL?.passive;
+  }
+
   // ========================================
   // НОВЫЕ ПУБЛИЧНЫЕ МЕТОДЫ ДЛЯ РАБОТЫ С КАРТОЙ
   // ========================================
+
+  renderMarkers(markers: UnifiedMarker[]): void {
+    try {
+      if (this.isRegisteredBackgroundPassive()) {
+        console.debug('[MapContextFacade] Skipping renderMarkers because background is passive');
+        return;
+      }
+      const r = this.currentRenderer as any;
+      if (r?.renderMarkers) {
+        r.renderMarkers(markers);
+        return;
+      }
+    } catch (error_) { console.debug('[MapContextFacade] renderMarkers failed:', error_); }
+    // otherwise no-op
+  }
 
   /**
    * Получение инстанса карты из текущего рендерера

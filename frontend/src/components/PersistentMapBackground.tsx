@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { projectManager } from '../services/projectManager';
 import { useContentStore } from '../stores/contentStore';
 import { mapFacade } from '../services/map_facade/index';
+import useMapDisplayMode from '../hooks/useMapDisplayMode';
 
 const PersistentMapBackground: React.FC = () => {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -18,11 +19,13 @@ const PersistentMapBackground: React.FC = () => {
 
     const el = ref.current;
 
-    // Инициализируем фон один раз — только когда пользователь открыл карту (map)
-    // (чтобы не загружать фон вместе с постами). После первой инициализации
-    // он сохраняется и больше не пересоздаётся.
-    // Planner имеет свою карту, не используем фон для него
-    if (initializedRef.current || !isMapOnly) return () => { mounted = false; };
+    // Инициализируем фон один раз — либо когда пользователь открыл карту (map) — активный фон,
+    // либо когда открыт только Posts/Activity (одноколонный режим) — пассивный фон (без маркеров/событий)
+    // Planner имеет свою карту (Yandex) — не инициализируем Leaflet в этом случае
+    const displayMode = useMapDisplayMode();
+    const isPassiveBackground = displayMode.isOnlyPostsAndActivity;
+
+    if (initializedRef.current || !(isMapOnly || isPassiveBackground)) return () => { mounted = false; };
 
     const initIfSized = async () => {
       try {
@@ -70,9 +73,20 @@ const PersistentMapBackground: React.FC = () => {
             markers: [],
             routes: []
           });
+
           if (api) {
-            try { mapFacade().registerBackgroundApi?.(api); } catch (e) { /* ignore */ }
+            try {
+              // If we are in passive background mode (Posts/Activity single-pane), register as passive
+              // so other consumers can detect it and avoid attaching markers/events to this background.
+              if (isPassiveBackground) {
+                const bgApi = { map: (api as any).map ?? api, passive: true };
+                mapFacade().registerBackgroundApi?.(bgApi);
+              } else {
+                mapFacade().registerBackgroundApi?.(api);
+              }
+            } catch (e) { /* ignore */ }
           }
+
           initializedRef.current = true;
         } catch (err) {
           console.warn('PersistentMapBackground: mapFacade init failed', err);
